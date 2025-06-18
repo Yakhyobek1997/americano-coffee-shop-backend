@@ -1,20 +1,44 @@
-function firstUniqueCharIndex(str: string): number {
-  const charCount: Record<string, number> = {};
+function sumOfUnique(nums: number[]): number {
+  const freq: Record<number, number> = {};
 
-  for (const char of str) {
-    charCount[char] = (charCount[char] || 0) + 1;
+  for (const num of nums) {
+    freq[num] = (freq[num] || 0) + 1;
   }
 
-  for (let i = 0; i < str.length; i++) {
-    if (charCount[str[i]] === 1) {
-      return i;
+  let sum = 0;
+  for (const num in freq) {
+    if (freq[num] === 1) {
+      sum += Number(num);
     }
   }
 
-  return -1;
+  return sum;
 }
 
-console.log(firstUniqueCharIndex("aabbcdd"));
+// Test
+console.log(sumOfUnique([1, 2, 3, 2]));
+
+
+
+
+
+// function firstUniqueCharIndex(str: string): number {
+//   const charCount: Record<string, number> = {};
+
+//   for (const char of str) {
+//     charCount[char] = (charCount[char] || 0) + 1;
+//   }
+
+//   for (let i = 0; i < str.length; i++) {
+//     if (charCount[str[i]] === 1) {
+//       return i;
+//     }
+//   }
+
+//   return -1;
+// }
+
+// console.log(firstUniqueCharIndex("aabbcdd"));
 
 
 // function findDuplicates(arr: number[]): number[] {
