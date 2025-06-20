@@ -1,22 +1,44 @@
-function sumOfUnique(nums: number[]): number {
-  const freq: Record<number, number> = {};
+function moveZeroes(nums: number[]): number[] {
+  const result: number[] = [];
+  let zeroCount = 0;
 
   for (const num of nums) {
-    freq[num] = (freq[num] || 0) + 1;
-  }
-
-  let sum = 0;
-  for (const num in freq) {
-    if (freq[num] === 1) {
-      sum += Number(num);
+    if (num === 0) {
+      zeroCount++;
+    } else {
+      result.push(num);
     }
   }
 
-  return sum;
+  while (zeroCount--) {
+    result.push(0);
+  }
+
+  return result;
 }
 
-// Test
-console.log(sumOfUnique([1, 2, 3, 2]));
+
+
+
+// function sumOfUnique(nums: number[]): number {
+//   const freq: Record<number, number> = {};
+
+//   for (const num of nums) {
+//     freq[num] = (freq[num] || 0) + 1;
+//   }
+
+//   let sum = 0;
+//   for (const num in freq) {
+//     if (freq[num] === 1) {
+//       sum += Number(num);
+//     }
+//   }
+
+//   return sum;
+// }
+
+// // Test
+// console.log(sumOfUnique([1, 2, 3, 2]));
 
 
 
