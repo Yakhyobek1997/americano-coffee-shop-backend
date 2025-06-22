@@ -1,22 +1,46 @@
-function moveZeroes(nums: number[]): number[] {
-  const result: number[] = [];
-  let zeroCount = 0;
-
-  for (const num of nums) {
-    if (num === 0) {
-      zeroCount++;
-    } else {
-      result.push(num);
+function groupedBy<T>(array: T[], key: keyof T): Record<string, T[]> {
+  return array.reduce((acc, item) => {
+    const groupKey = String(item[key]);
+    if (!acc[groupKey]) {
+      acc[groupKey] = [];
     }
-  }
-
-  while (zeroCount--) {
-    result.push(0);
-  }
-
-  return result;
+    acc[groupKey].push(item);
+    return acc;
+  }, {} as Record<string, T[]>);
 }
 
+const result = groupedBy(
+  [
+    { name: "Alica", age: 30, city: "Tashkent" },
+    { name: "BBB", age: 25, city: "Seoul" }
+  ],
+  'age'
+);
+
+console.log(result);
+
+
+
+
+
+// function moveZeroes(nums: number[]): number[] {
+//   const result: number[] = [];
+//   let zeroCount = 0;
+
+//   for (const num of nums) {
+//     if (num === 0) {
+//       zeroCount++;
+//     } else {
+//       result.push(num);
+//     }
+//   }
+
+//   while (zeroCount--) {
+//     result.push(0);
+//   }
+
+//   return result;
+// }
 
 
 
