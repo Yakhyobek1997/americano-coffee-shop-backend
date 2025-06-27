@@ -1,23 +1,35 @@
-function groupedBy<T>(array: T[], key: keyof T): Record<string, T[]> {
-  return array.reduce((acc, item) => {
-    const groupKey = String(item[key]);
-    if (!acc[groupKey]) {
-      acc[groupKey] = [];
-    }
-    acc[groupKey].push(item);
-    return acc;
-  }, {} as Record<string, T[]>);
+function checkArray(arr: (string | number)[]): boolean {
+  const hasString = arr.some(item => typeof item === 'string');
+  const hasNumber = arr.some(item => typeof item === 'number');
+  return hasString && hasNumber;
 }
 
-const result = groupedBy(
-  [
-    { name: "Alica", age: 30, city: "Tashkent" },
-    { name: "BBB", age: 25, city: "Seoul" }
-  ],
-  'age'
-);
 
-console.log(result);
+console.log(checkArray(['hello', 123, 'world'])); 
+console.log(checkArray(['hello', '123', 'world'])); 
+
+
+
+// function groupedBy<T>(array: T[], key: keyof T): Record<string, T[]> {
+//   return array.reduce((acc, item) => {
+//     const groupKey = String(item[key]);
+//     if (!acc[groupKey]) {
+//       acc[groupKey] = [];
+//     }
+//     acc[groupKey].push(item);
+//     return acc;
+//   }, {} as Record<string, T[]>);
+// }
+
+// const result = groupedBy(
+//   [
+//     { name: "Alica", age: 30, city: "Tashkent" },
+//     { name: "BBB", age: 25, city: "Seoul" }
+//   ],
+//   'age'
+// );
+
+// console.log(result);
 
 
 
