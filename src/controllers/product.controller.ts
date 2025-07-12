@@ -18,27 +18,31 @@ productController.getProducts = async (req: Request, res: Response) => {
     console.log("getProducts");
 
     const { page, limit, order, productCollection, search } = req.query; // distraction
-// Kiirib kevotkan requestni ichidagi queryni Distraction
-// qilib uni ichidagi malumotlarni ayirvommiz
+    // Kiirib kevotkan requestni ichidagi queryni Distraction
+    // qilib uni ichidagi malumotlarni ayirvommiz
 
-    const inquiry: ProductInquiry = { // ProductInqery objectini
-  // pasdan proportylari kevotti
+    const inquiry: ProductInquiry = {
+      // ProductInqery objectini
+      // pasdan proportylari kevotti
       order: String(order),
       page: Number(page),
-      limit: Number(limit), 
+      limit: Number(limit),
       // keyin oxirda inquiry ga tenglavommiz
     };
 
     if (
       typeof productCollection === "string" && // product collection malumoti
       // kirib kevotkan bosa
-      Object.values(ProductCollection).includes(productCollection as ProductCollection)
+      Object.values(ProductCollection).includes(
+        productCollection as ProductCollection
+      )
     ) {
       inquiry.productCollection = productCollection as ProductCollection;
       // inqueryni boyitvommiz
     }
 
-    if (search) { // search malumoti kirib kevotkan bo'lsa
+    if (search) {
+      // search malumoti kirib kevotkan bo'lsa
       inquiry.search = String(search); // inquiry ni search ni boyitommiz
     }
 
@@ -53,17 +57,16 @@ productController.getProducts = async (req: Request, res: Response) => {
   }
 };
 
-
 productController.getProduct = async (req: ExtendedRequest, res: Response) => {
   try {
-    console.log("getProduct");// getProduct ni log qivommiz
+    console.log("getProduct"); // getProduct ni log qivommiz
     const { id } = req.params; // Distract
 
     const memberId = req.member?._id ?? null,
-// req.member? ning id si yoki null olib memberIdga tenglavommiz
-        result = await productService.getProduct(memberId, id);
-// productService methodni chaqirib memberId, id argument sifatida path qilib
-// natijani kutib resultga tengladik
+      // req.member? ning id si yoki null olib memberIdga tenglavommiz
+      result = await productService.getProduct(memberId, id);
+    // productService methodni chaqirib memberId, id argument sifatida path qilib
+    // natijani kutib resultga tengladik
     res.status(HttpCode.OK).json(result);
   } catch (err) {
     console.log("Error, getProduct:", err);
@@ -71,8 +74,6 @@ productController.getProduct = async (req: ExtendedRequest, res: Response) => {
     else res.status(Errors.standard.code).json(Errors.standard);
   }
 };
-
-
 
 productController.getAllProducts = async (req: Request, res: Response) => {
   try {
@@ -104,14 +105,14 @@ productController.createNewProduct = async (
     await productService.createNewProduct(data);
 
     res.send(
-      `<script> alert("Sucessful creation!"); window.location.replace('/admin/product/all') </script>`
+      `<script> alert("Successful creation!"); window.location.replace('/admin/product/all'); </script>`
     );
   } catch (err) {
     console.log("Error, createNewProduct:", err);
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(
-      `<script> alert("${message}"); window.location.replace('/admin/product/all') </script>`
+      `<script> alert("${message}"); window.location.replace('/admin/product/all'); </script>`
     );
   }
 };

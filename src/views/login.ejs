@@ -1,45 +1,129 @@
-<%- include('includes/header') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Modern</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f8fafc, #e0f7fa);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
 
-<link rel="stylesheet" type="text/css" href="/css/login.css" />
+      .login-container {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
 
-<body>
-  <form class="login-container" action="/admin/login" METHOD="POST">
-    <div class="login-frame">
-      <div class="login-top">
-        <span>Enter</span>
-        <div>Go back <a href="/admin" style="color: #6440fb">Home</a></div>
-        <p>
-          Not registered yet?
-          <a href="/admin/signup" style="color: #6440fb">Signup</a>
-        </p>
+      .login-header {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+
+      .login-header h2 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 18px;
+      }
+
+      label {
+        font-weight: 500;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      input[type="text"]:focus,
+      input[type="password"]:focus {
+        border-color: #2196f3;
+      }
+
+      .login-btn {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        background-color: #4caf50;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .login-btn:hover {
+        background-color: #43a047;
+      }
+
+      .alt-link {
+        text-align: center;
+        margin-top: 16px;
+        font-size: 14px;
+      }
+
+      .alt-link a {
+        color: #6440fb;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="login-container" action="/admin/login" method="POST">
+      <div class="login-header">
+        <h2>Americano</h2>
       </div>
-      <div class="login-input-frame">
-        <div class="login-input-container">
-          <label>Restaurant *</label>
-          <input
-            type="text"
-            name="memberNick"
-            class="member-nick"
-            placeholder="Username"
-            value=""
-            required
-          />
-        </div>
-        <div class="login-input-container">
-          <label>Password *</label>
-          <input
-            type="password"
-            name="memberPassword"
-            class="member-password"
-            placeholder="Password"
-            value=""
-            required
-          />
-        </div>
-      </div>
-      <button class="login-btn btn" name="login" type="submit">Login</button>
-    </div>
-  </form>
-</body>
 
-<%- include('includes/footer') %>
+      <div class="form-group">
+        <label for="memberNick">Restaurant *</label>
+        <input
+          type="text"
+          name="memberNick"
+          placeholder="e.g. FoodBox"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="memberPassword">Password *</label>
+        <input type="password" name="memberPassword" required />
+      </div>
+
+      <button class="login-btn" name="login" type="submit">Login</button>
+
+      <div class="alt-link">
+        Not registered yet?
+        <a href="/admin/signup">Signup</a><br />
+        <a href="/admin">← Back to Home</a>
+      </div>
+    </form>
+  </body>
+</html>

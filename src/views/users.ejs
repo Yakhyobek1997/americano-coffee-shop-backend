@@ -1,87 +1,73 @@
 <%- include('includes/header') %>
-
 <link rel="stylesheet" type="text/css" href="/css/users.css" />
 
 <body>
   <div class="users-container">
-    <% if(!member) { %>
-    <div class="navigation-menu">
-      <ul class="nav justify-content-center">
-        <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link active" href="/admin/">Home</a>
-        </li>
-        <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/admin/signup">SignUp</a>
-        </li>
-        <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/admin/login">Login</a>
-        </li>
-      </ul>
-    </div>
+    <% if (!member) { %>
+      <!-- Navigation for non-authenticated users -->
+      <div class="navigation-menu">
+        <ul class="nav justify-content-center">
+          <li class="nav-item"><a class="nav-link active" href="/admin/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/admin/signup">Sign Up</a></li>
+          <li class="nav-item"><a class="nav-link" href="/admin/login">Login</a></li>
+        </ul>
+      </div>
 
-    <div class="users-frame" style="color: #dddddd">
-      <div class="board" style="font-size: 40px">Please login first!</div>
-    </div>
-
-    <% } else { %>
-    <div class="navigation-menu">
-      <ul class="nav justify-content-center">
-        <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link active" href="/admin/">Home</a>
-        </li>
-        <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/admin/product/all">Menu</a>
-        </li>
-        <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/admin/user/all">Users</a>
-        </li>
-        <li
-          class="nav-item"
-          style="cursor: pointer"
-          onclick="return confirm('Do you really want to logout?')"
-        >
-          <a class="nav-link" href="/admin/logout">Logout</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="users-frame">
-      <div class="board">
-        <div class="user-table">
-          <span class="header-name" style="margin-bottom: 30px"
-            >All Users List</span
-          >
-          <table class="table table-hover table-sm">
-            <thead class="thead-light">
-              <tr class="thead-light">
-                <th scope="col">No</th>
-                <th scope="col">Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <!--  LOOP PRODUCTS: START  -->
-
-            <% users.map(function(value, index) { %>
-              <tr style="background: white">
-                <td><%= index + 1 %></td>
-                <td><%= value.memberNick %></td>
-                <td><%= value.memberPhone %></td>
-                <td style="width: 13%">
-                  <select class="spec-select member-status" id="<%= value._id %>">
-                    <option value="ACTIVE" <%= value.memberStatus === 'ACTIVE' ? 'selected' : '' %> >ACTIVE</option>
-                    <option value="BLOCK" <%= value.memberStatus === 'BLOCK' ? 'selected' : '' %> >BLOCK</option>
-                    <option value="DELETE" <%= value.memberStatus === 'DELETE' ? 'selected' : '' %> >DELETE</option>
-                  </select>
-                </td>
-              </tr>
-            <% }) %>
-
-            <!--  LOOP PRODUCTS: END  -->
-          </table>
+      <!-- Access restriction message -->
+      <div class="users-frame">
+        <div class="board">
+          <div class="header-name" style="font-size: 32px; color: #fff;">
+            🚫 Please log in to view users!
+          </div>
         </div>
       </div>
-    </div>
+    <% } else { %>
+      <!-- Navigation for authenticated users -->
+      <div class="navigation-menu">
+        <ul class="nav justify-content-center">
+          <li class="nav-item"><a class="nav-link active" href="/admin/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/admin/product/all">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="/admin/user/all">Users</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/logout" onclick="return confirm('Do you really want to logout?')">Logout</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Users table -->
+      <div class="users-frame">
+        <div class="board">
+          <div class="user-table">
+            <span class="header-name"> All Registered Users</span>
+            <table class="table table-hover table-bordered table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Username</th>
+                  <th>Phone</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% users.map(function(user, index) { %>
+                  <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= user.memberNick %></td>
+                    <td><%= user.memberPhone %></td>
+                    <td>
+                      <select class="spec-select member-status" id="<%= user._id %>">
+                        <option value="ACTIVE" <%= user.memberStatus === 'ACTIVE' ? 'selected' : '' %>>ACTIVE</option>
+                        <option value="BLOCK" <%= user.memberStatus === 'BLOCK' ? 'selected' : '' %>>BLOCK</option>
+                        <option value="DELETE" <%= user.memberStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                      </select>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     <% } %>
   </div>
 
