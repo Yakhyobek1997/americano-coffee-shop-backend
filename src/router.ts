@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router(); // router variablni xosil qilamiz va (Router methodni chaqiramiz)
-import memberController from "./controllers/member.contoller";
+import memberController from "./controllers/member.controller";
 import mongoose from "mongoose";
 import uploader from "./libs/utils/uploader";
 import productController from "./controllers/product.controller";

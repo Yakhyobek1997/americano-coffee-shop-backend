@@ -20,9 +20,8 @@ mongoose
   .connect(process.env.MONGO_URL as string, {})
   .then(() => {
     console.log("MongoDB connection succeed");
-     // MongoDBga ulanish muvaffaqiyatli 
+     // MongoDBga ulanish muvaffaqiyatli
      // amalga oshirilganligini konsolga chiqaramiz.
-
     // PORTni .env fayldan olamiz, agar PORT 
     // o'zgaruvchisi mavjud bo'lmasa, u holda 
     // standart 3003 port ishlatiladi.

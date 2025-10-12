@@ -65,12 +65,13 @@ restaurantController.processSignup = async (
 ) => {
   try {
     console.log("processSignup");
+    console.log("Uploaded file:", req.file);
     const file = req.file;
     if (!file)
-      throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.NO_IMAGE_UPLOADED);
 
     const newMember: MemberInput = req.body;
-    newMember.memberImage = file?.path;
+    newMember.memberImage = file?.path.replace(/\\/g, "/");
     newMember.memberType = MemberType.RESTAURANT;
     const result = await memberService.processSignup(newMember);
 
@@ -201,8 +202,8 @@ restaurantController.verifyRestaurant = (
       req.member = req.session.member;
       next()
     } else {
-      const message = Message.NOT_AUTHENTICATED
-      res.send(`<script> alert("${message}") window.location.replace('/admin/login'); </script>`);
+      const message = Message.NOT_AUTHENTICATED;
+      res.send(`<script> alert("${message}"); window.location.replace('/admin/login'); </script>`);
     }
 };
 
