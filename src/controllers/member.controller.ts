@@ -34,7 +34,6 @@ memberController.getRestaurant = async (req: Request, res: Response) => {
     else res.status(Errors.standard.code).json(Errors.standard);
   }
 };
-
 // ============================
 // SIGNUP HANDLER
 // ============================
